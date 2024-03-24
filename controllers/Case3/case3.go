@@ -30,7 +30,7 @@ func GetStudentByID(ctx *gin.Context) {
 	}
 
 	// Query data nilai berdasarkan ID siswa
-	var scores []models.Scores
+	var scores []models.Score
 	db.Where("student_id = ?", studentID).Find(&scores)
 
 	if len(scores) == 0 {
@@ -39,14 +39,14 @@ func GetStudentByID(ctx *gin.Context) {
 	}
 
 	// Ambil data terkait dari tabel courses dan lecturers
-	var courses []models.Courses
-	var lecturers []models.Lecturers
+	var courses []models.Course
+	var lecturers []models.Lecturer
 	for _, score := range scores {
-		var course models.Courses
+		var course models.Course
 		db.First(&course, score.Course_id)
 		courses = append(courses, course)
 
-		var lecturer models.Lecturers
+		var lecturer models.Lecturer
 		db.First(&lecturer, course.Lecturer_id)
 		lecturers = append(lecturers, lecturer)
 	}

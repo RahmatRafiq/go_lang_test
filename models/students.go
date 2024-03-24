@@ -1,10 +1,10 @@
 package models
 
 type StudentScore struct {
-	Student   Student     `json:"student"`
-	Scores    []Scores    `json:"scores"`
-	Courses   []Courses   `json:"courses"`
-	Lecturers []Lecturers `json:"lecturers"`
+	Student   Student    `json:"student"`
+	Scores    []Score    `json:"scores"`
+	Courses   []Course   `json:"courses"`
+	Lecturers []Lecturer `json:"lecturers"`
 }
 
 type Student struct {
