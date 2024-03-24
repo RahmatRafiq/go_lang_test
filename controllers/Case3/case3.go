@@ -25,7 +25,7 @@ func Index(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"length":  ctx.Query("id"),
 		"data":    data,
-		"message": "Hello World!",
+		"message": "Data Found.",
 		"error":   err,
 	})
 }
