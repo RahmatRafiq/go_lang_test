@@ -1,6 +1,7 @@
 package models
 
 type Score struct {
+	// gorm.Model
 	ID         string `json:"id" gorm:"primaryKey"`
 	Course_id  string `json:"course_id" binding:"required" form:"course_id"`
 	Student_id string `json:"student_id" binding:"required" form:"student_id"`

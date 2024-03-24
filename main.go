@@ -12,7 +12,7 @@ func main() {
 
 	// 	// students
 	route.GET("/students/all", case3.GetAllStudents)
-	route.GET("/students/:id", case3.GetStudentByID)
+	route.GET("/students", case3.Index)
 
 	log.Println("Server started on: http://localhost:8080")
 	route.Run(":8080")

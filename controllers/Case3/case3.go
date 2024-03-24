@@ -4,7 +4,6 @@ import (
 	"Golang_CRUD_Native/config"
 	"Golang_CRUD_Native/models"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,50 +17,15 @@ func GetAllStudents(ctx *gin.Context) {
 	ctx.IndentedJSON(http.StatusOK, data)
 }
 
-func GetStudentByID(ctx *gin.Context) {
+func Index(ctx *gin.Context) {
 	db := config.ConnectDB(ctx)
+	var data []models.Student
+	err := db.Preload("Scores.Course.Lecturer").Where("id =?", ctx.Query("id")).Find(&data).Error
 
-	// Ambil ID siswa dari parameter URL
-	studentIDStr := ctx.Param("id")
-	studentID, err := strconv.Atoi(studentIDStr)
-	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid student ID"})
-		return
-	}
-
-	// Query data nilai berdasarkan ID siswa
-	var scores []models.Score
-	db.Where("student_id = ?", studentID).Find(&scores)
-
-	if len(scores) == 0 {
-		ctx.JSON(http.StatusNotFound, gin.H{"error": "Scores not found for the student"})
-		return
-	}
-
-	// Ambil data terkait dari tabel courses dan lecturers
-	var courses []models.Course
-	var lecturers []models.Lecturer
-	for _, score := range scores {
-		var course models.Course
-		db.First(&course, score.Course_id)
-		courses = append(courses, course)
-
-		var lecturer models.Lecturer
-		db.First(&lecturer, course.Lecturer_id)
-		lecturers = append(lecturers, lecturer)
-	}
-
-	// Ambil data siswa dari salah satu data nilai
-	var student models.Student
-	db.First(&student, scores[0].Student_id)
-
-	// Masukkan data ke dalam response
-	responseData := gin.H{
-		"student":   student,
-		"scores":    scores,
-		"courses":   courses,
-		"lecturers": lecturers,
-	}
-
-	ctx.JSON(http.StatusOK, responseData)
+	ctx.JSON(http.StatusOK, gin.H{
+		"length":  ctx.Query("id"),
+		"data":    data,
+		"message": "Hello World!",
+		"error":   err,
+	})
 }

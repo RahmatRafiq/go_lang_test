@@ -8,7 +8,8 @@ type StudentScore struct {
 }
 
 type Student struct {
-	ID          string `json:"id" gorm:"primaryKey"`
-	StudentName string `json:"student_name" binding:"required" form:"student_name"`
-	City        string `json:"city" binding:"required" form:"city"`
+	ID          string  `json:"id" gorm:"primaryKey"`
+	StudentName string  `json:"student_name" binding:"required" form:"student_name"`
+	City        string  `json:"city" binding:"required" form:"city"`
+	Scores      []Score `json:"scores" gorm:"foreignKey:Student_id"`
 }
