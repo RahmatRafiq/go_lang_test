@@ -21,11 +21,17 @@ func Index(ctx *gin.Context) {
 	db := config.ConnectDB(ctx)
 	var data []models.Student
 	err := db.Preload("Scores.Course.Lecturer").Where("id =?", ctx.Query("id")).Find(&data).Error
-
-	ctx.JSON(http.StatusOK, gin.H{
-		"length":  ctx.Query("id"),
-		"data":    data,
-		"message": "Data Found.",
-		"error":   err,
-	})
+	if err == nil {
+		if len(data) == 0 {
+			ctx.JSON(404, gin.H{
+				"message": "Data not found",
+			})
+		}
+		ctx.JSON(http.StatusOK, gin.H{
+			"length":  ctx.Query("id"),
+			"data":    data,
+			"message": "Data Found.",
+			"error":   err,
+		})
+	}
 }
