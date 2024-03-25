@@ -23,6 +23,9 @@ func (t *Token) Stopconcurrency(ctx *gin.Context) {
 	if t.isConcurrencyRun {
 		close(t.stopCh)
 		t.isConcurrencyRun = false
+		ctx.JSON(200, gin.H{
+			"message": "Concurrency Stopped.",
+		})
 	}
 }
 
@@ -35,6 +38,10 @@ func (t *Token) Startconcurrency(ctx *gin.Context) {
 		t.isConcurrencyRun = true
 
 		go t.concurrentProcess()
+
+		ctx.JSON(200, gin.H{
+			"message": "Concurrency Started.",
+		})
 	}
 }
 
@@ -46,7 +53,6 @@ func (t *Token) concurrentProcess() {
 		default:
 			t.Token = fmt.Sprintf("Token-%d", rand.Intn(100))
 			fmt.Println("Random Number:", t.Token)
-			// fmt.Println("Random Number:", rand.Intn(100))
 			time.Sleep(time.Second)
 		}
 	}
@@ -57,6 +63,7 @@ func (t *Token) GetToken(ctx *gin.Context) {
 	defer t.mu.Unlock()
 
 	ctx.JSON(200, gin.H{
-		"token": t.Token,
+		"message": "Token Generated is ",
+		"token":   t.Token,
 	})
 }
