@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "84086463-f5f6-47d5-888b-a8f50394d27d",
+		"name": "go_lang_test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26328731"
+	},
+	"item": [
+		{
+			"name": "Get All Student",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/students",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Student by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/students",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Start concurrency",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/task5/startconcurrency",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"task5",
+						"startconcurrency"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stop concurrency",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/task5/stopconcurrency",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"task5",
+						"stopconcurrency"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get token concurrency",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/task5",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"task5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
