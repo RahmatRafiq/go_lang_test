@@ -1,8 +1,8 @@
 package case5
 
 import (
+	tokengenerator "Golang_CRUD_Native/controllers/TokenGenerator"
 	"fmt"
-	"math/rand"
 	"sync"
 	"time"
 
@@ -51,8 +51,8 @@ func (t *Token) concurrentProcess() {
 		case <-t.stopCh:
 			return
 		default:
-			t.Token = fmt.Sprintf("Token-%d", rand.Intn(100))
-			fmt.Println("Random Number:", t.Token)
+			t.Token = tokengenerator.RandomToken(30)
+			fmt.Println("Random Token for Cross site: ", t.Token)
 			time.Sleep(time.Second)
 		}
 	}
